@@ -9,6 +9,7 @@ sc = pickle.load(open('standscaler.pkl', 'rb'))
 ms = pickle.load(open('minmaxscaler.pkl', 'rb'))
 
 app = Flask(__name__)
+
 CORS(app)  # Allow cross-origin requests (important for mobile)
 
 # Crop dictionary
@@ -47,6 +48,10 @@ def predict_web():
         result = f"Error in prediction: {str(e)}"
 
     return render_template("index.html", result=result)
+
+@app.route("/api/ping")
+def ping():
+        return "pong"
 
 # ✅ New API endpoint for mobile/Android app
 @app.route("/api/recommend", methods=["POST"])

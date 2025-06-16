@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify
+import os
 import numpy as np
 import pickle
 from flask_cors import CORS
@@ -80,4 +81,4 @@ def recommend_api():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
